@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="功能">
+        <menu>
+            <item
+                android:id="@+id/nav_main"
+                android:icon="@drawable/main_icon"
+                android:title="主界面"/>
+            <item
+                android:id="@+id/nav_category"
+                android:icon="@drawable/category_icon"
+                android:title="分类"/>
+            <item
+                android:id="@+id/nav_hot"
+                android:icon="@drawable/hot_icon"
+                android:title="热门"/>
+            <item
+                android:id="@+id/nav_search"
+                android:icon="@drawable/search_icon"
+                android:title="搜索"/>
+        </menu>
+    </item>
+
+    <item android:title="其他">
+        <menu>
+            <item
+                android:id="@+id/about"
+                android:icon="@drawable/about_icon"
+                android:title="关于"/>
+            <item
+                android:id="@+id/more"
+                android:icon="@drawable/more_icon"
+                android:title="更多"/>
+        </menu>
+    </item>
+
+</menu>

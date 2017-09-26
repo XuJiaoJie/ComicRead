@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/include_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@color/colorPrimary"
+    app:popupTheme="@style/OverFlowMenuTheme"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:titleTextColor="@color/white">
+
+    <!--这里给TextView设置了style属性，与ActionBar.Title保持一致 -->
+    <!--注意在代码中设置 getSupportActionBar().setDisplayShowTitleEnabled(false);-->
+    <TextView
+        android:id="@+id/include_tv_center_title"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        />
+</android.support.v7.widget.Toolbar>
