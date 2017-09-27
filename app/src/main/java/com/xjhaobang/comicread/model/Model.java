@@ -7,8 +7,6 @@ import com.xjhaobang.comicread.utils.OkHttpUtil;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.UnsupportedEncodingException;
 
@@ -22,11 +20,38 @@ import static android.content.ContentValues.TAG;
 
 public class Model {
 
-    public Model() {
-        OkHttpUtil.getInstance().getAsync("http://ac.qq.com/Comic/all/state/pink/search/time/vip/1/page/1", new OkHttpResultCallback() {
+//    public Model() {
+//        OkHttpUtil.getInstance().getAsync("http://ac.qq.com/Comic/all/state/pink/search/time/vip/1/page/1", new OkHttpResultCallback() {
+//            @Override
+//            public void onError(Call call, Exception e) {
+//                Log.e(TAG, "onError: " );
+//            }
+//
+//            @Override
+//            public void onResponse(byte[] bytes) {
+//                try {
+//                    String s = new String(bytes,"utf-8");
+//                    Document doc = Jsoup.parse(s);
+//                    Elements e = doc.select("div.ret-works-cover");
+//                    for (Element e1 : e){
+//                        Element e2 = e1.getElementsByTag("a").first();
+//                        Log.e(TAG, "run: " + e2.attr("title"));
+//                        Log.e(TAG, "run: " + e2.attr("href"));
+//                        Element e3 = e2.getElementsByTag("img").first();
+//                        Log.e(TAG, "run: " + e3.attr("data-original"));
+//                    }
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
+
+    public void test(){
+        OkHttpUtil.getInstance().getAsync("http://ac.qq.com/Jump", new OkHttpResultCallback() {
             @Override
             public void onError(Call call, Exception e) {
-                Log.e(TAG, "onError: " );
+                Log.e(TAG, "onError: "  );
             }
 
             @Override
@@ -34,19 +59,24 @@ public class Model {
                 try {
                     String s = new String(bytes,"utf-8");
                     Document doc = Jsoup.parse(s);
-                    Elements e = doc.select("div.ret-works-cover");
-                    for (Element e1 : e){
-                        Element e2 = e1.getElementsByTag("a").first();
-                        Log.e(TAG, "run: " + e2.attr("title"));
-                        Log.e(TAG, "run: " + e2.attr("href"));
-                        Element e3 = e2.getElementsByTag("img").first();
-                        Log.e(TAG, "run: " + e3.attr("data-original"));
-                    }
+//                    //主界面轮播
+//                    Element e = doc.select("ul.banner-slider-list").first();
+//                    Elements es = e.getElementsByTag("li");
+//                    for (Element ee : es){
+//                        Element ee2 = ee.getElementsByTag("a").first();
+//                        Log.e(TAG, "onResponse: " + ee2.attr("href"));
+//                        Log.e(TAG, "onResponse: " + ee2.attr("title"));
+//                        Element ee3 = ee2.getElementsByTag("img").first();
+//                        Log.e(TAG, "onResponse: " + ee3.attr("src"));
+//                    }
+
+
+
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
             }
         });
-
     }
+
 }

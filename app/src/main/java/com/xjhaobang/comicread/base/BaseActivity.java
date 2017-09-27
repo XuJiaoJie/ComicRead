@@ -11,6 +11,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import butterknife.ButterKnife;
 
 
@@ -22,6 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(setLayoutResID());
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ButterKnife.bind(this);
+        Fresco.initialize(this);
         initData();
         initView();
         initListener();

@@ -10,10 +10,10 @@
     tools:context="com.xjhaobang.comicread.ui.MainActivity"
     tools:openDrawer="start">
 
-    <FrameLayout
-        android:id="@+id/fl_layout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -23,7 +23,12 @@
             app:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar">
         </android.support.v7.widget.Toolbar>
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fl_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
 
 
     <android.support.design.widget.NavigationView
