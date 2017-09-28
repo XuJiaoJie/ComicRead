@@ -10,7 +10,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:layout_gravity="center_horizontal">
 
@@ -18,7 +20,6 @@
             android:id="@+id/sdv_pic"
             android:layout_width="140dp"
             android:layout_height="170dp"
-            android:layout_gravity="center_horizontal"
             fresco:fadeDuration="300"
             fresco:actualImageScaleType="fitCenter"
             fresco:placeholderImage="@drawable/photo_empty_photo"
@@ -31,6 +32,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="新网球王子"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:textColor="@color/black"
             android:layout_marginTop="5dp"/>
 
@@ -38,9 +41,10 @@
             android:id="@+id/tv_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="3dp"
-            tools:text="更新到623话"
-            android:textColor="@color/textColorBlack"/>
+            tools:text="更新到623话"/>
 
     </LinearLayout>
     

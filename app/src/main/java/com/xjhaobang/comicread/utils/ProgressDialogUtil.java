@@ -24,7 +24,7 @@ public class ProgressDialogUtil {
         sProgressDialog = new ProgressDialog(context);
         sProgressDialog.setMessage(msg);
         sProgressDialog.setCanceledOnTouchOutside(false);
-        sProgressDialog.setCancelable(false);
+        sProgressDialog.setCancelable(true);
         sProgressDialog.show();
         isShow = true;
     }

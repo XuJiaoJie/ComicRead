@@ -8,17 +8,17 @@ import java.util.List;
  * Created by PC on 2017/9/28.
  */
 
-public class GetMainDataContract {
-    public interface View{
+public interface GetMainDataContract {
+    interface View{
         void getMainDataSuccess(List<ComicBeen> pollingList,List<ComicBeen> updateList);
         void getError(String msg);
     }
 
-    public interface Model{
+    interface Model{
         void getMainData();
     }
 
-    public interface Presenter{
+    interface Presenter{
         void getMainData();
 
         void getMainDataSuccess(List<ComicBeen> pollingList,List<ComicBeen> updateList);

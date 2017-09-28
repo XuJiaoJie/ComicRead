@@ -18,19 +18,20 @@ import butterknife.BindView;
  * Created by PC on 2017/9/28.
  */
 
-public class UpdaterComicRvAdapter extends BaseRecyclerViewAdapter<ComicBeen> {
+public class HotComicRvAdapter extends BaseRecyclerViewAdapter<ComicBeen> {
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_update_comic, parent, false);
-        return new UpdateComicHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hot_comic, parent, false);
+        return new HotComicHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((UpdateComicHolder)holder).bindView(mDataList.get(position));
+        ((HotComicHolder)holder).bindView(mDataList.get(position));
     }
 
-    class UpdateComicHolder extends BaseRvHolder {
+    class HotComicHolder extends BaseRvHolder{
         @BindView(R.id.sdv_pic)
         SimpleDraweeView mSdvPic;
         @BindView(R.id.tv_title)
@@ -38,7 +39,7 @@ public class UpdaterComicRvAdapter extends BaseRecyclerViewAdapter<ComicBeen> {
         @BindView(R.id.tv_update)
         TextView mTvUpdate;
 
-        UpdateComicHolder(View itemView) {
+        HotComicHolder(View itemView) {
             super(itemView);
         }
 

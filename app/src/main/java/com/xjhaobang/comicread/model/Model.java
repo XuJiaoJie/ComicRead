@@ -2,13 +2,9 @@ package com.xjhaobang.comicread.model;
 
 import android.util.Log;
 
+import com.xjhaobang.comicread.utils.JsoupUtil;
 import com.xjhaobang.comicread.utils.OkHttpResultCallback;
 import com.xjhaobang.comicread.utils.OkHttpUtil;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 import java.io.UnsupportedEncodingException;
 
@@ -60,30 +56,7 @@ public class Model {
             public void onResponse(byte[] bytes) {
                 try {
                     String s = new String(bytes,"utf-8");
-                    Document doc = Jsoup.parse(s);
-//                    //主界面轮播
-//                    Element e = doc.select("ul.banner-slider-list").first();
-//                    Elements es = e.getElementsByTag("li");
-//                    for (Element ee : es){
-//                        Element ee2 = ee.getElementsByTag("a").first();
-//                        Log.e(TAG, "onResponse: " + ee2.attr("href"));
-//                        Log.e(TAG, "onResponse: " + ee2.attr("title"));
-//                        Element ee3 = ee2.getElementsByTag("img").first();
-//                        Log.e(TAG, "onResponse: " + ee3.attr("src"));
-//                    }
-                    Element e = doc.select("ul.japan-new-list").first();
-                    Elements es = e.select("div.japan-new-mod");
-                    for (Element ee : es){
-                        Element ee2 = ee.getElementsByTag("a").first();
-                        Log.e(TAG, "onResponse: " + ee2.attr("href"));
-                        Log.e(TAG, "onResponse: " + ee2.attr("title"));
-                        Element ee3 = ee2.getElementsByTag("img").first();
-                        Log.e(TAG, "onResponse: " + ee3.attr("src"));
-                        Element ee4 = ee.select("div.new-text").first();
-                        Elements ees =ee4.getElementsByTag("a");
-                        Log.e(TAG, "onResponse: " + ees.get(1).text());
-                    }
-
+                    JsoupUtil.getInstance().getHotData(s);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

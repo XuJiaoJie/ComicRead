@@ -30,7 +30,7 @@ public class JsoupUtil {
     }
 
     /**
-     * 主界面轮播效果数据
+     * 主界面轮播效果漫画数据
      */
     public List<ComicBeen> getPollingData(String s) {
         List<ComicBeen> list = new ArrayList<>();
@@ -50,7 +50,7 @@ public class JsoupUtil {
     }
 
     /**
-     * 最新更新数据
+     * 最新更新漫画数据
      */
     public List<ComicBeen> getUpdateData(String s){
         List<ComicBeen> list = new ArrayList<>();
@@ -67,6 +67,32 @@ public class JsoupUtil {
             Element ee4 = ee.select("div.new-text").first();
             Elements ees =ee4.getElementsByTag("a");
             been.setUpdate(ees.get(1).text());
+            list.add(been);
+        }
+        return list;
+    }
+
+    /**
+     * 获取热门漫画数据
+     */
+    public List<ComicBeen> getHotData(String s){
+        List<ComicBeen> list = new ArrayList<>();
+        Document doc = Jsoup.parse(s);
+        Elements es = doc.select("li.comic-content-item");
+        for (Element ee : es ){
+            ComicBeen been = new ComicBeen();
+            Element ee1 = ee.select("a.Japan-comic-title").first();
+            been.setUrl(ee1.attr("href"));
+            Element ee2 = ee1.getElementsByTag("img").first();
+            String ss = ee2.attr("src");
+            if (ss.endsWith("gif")){
+                ss = ee2.attr("data-original");
+            }
+            been.setPicUrl(ss);
+            Element ee3 = ee.select("a.japan-comic-a").first();
+            been.setTitle(ee3.text());
+            Element ee4 = ee.select("a.japan-comic-new").first();
+            been.setUpdate(ee4.text());
             list.add(been);
         }
         return list;

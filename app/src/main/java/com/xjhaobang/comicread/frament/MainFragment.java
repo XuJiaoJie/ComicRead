@@ -16,6 +16,7 @@ import com.xjhaobang.comicread.presenter.GetMainDataPresenterImpl;
 import com.xjhaobang.comicread.utils.ProgressDialogUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,12 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
     @Override
     protected void setListener() {
         mUpdaterComicRvAdapter.setOnRecyclerViewListener(this);
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                showToast(mPollingList.get(position).getTitle());
+            }
+        });
     }
 
     @Override
