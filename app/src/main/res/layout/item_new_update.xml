@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:fresco="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_gravity="center_horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdv_pic"
+            android:layout_width="140dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center_horizontal"
+            fresco:fadeDuration="300"
+            fresco:actualImageScaleType="fitCenter"
+            fresco:placeholderImage="@drawable/photo_empty_photo"
+            fresco:placeholderImageScaleType="fitCenter"
+            fresco:failureImage="@drawable/photo_empty_photo"
+            fresco:failureImageScaleType="fitCenter"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="新网球王子"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            tools:text="更新到623话"
+            android:textColor="@color/textColorBlack"/>
+
+    </LinearLayout>
+    
+
+    
+</LinearLayout>

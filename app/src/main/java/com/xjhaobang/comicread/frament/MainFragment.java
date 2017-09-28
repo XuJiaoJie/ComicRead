@@ -1,10 +1,19 @@
 package com.xjhaobang.comicread.frament;
 
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.xjhaobang.comicread.R;
+import com.xjhaobang.comicread.adapter.UpdaterComicRvAdapter;
 import com.xjhaobang.comicread.base.BaseFragment;
+import com.xjhaobang.comicread.been.ComicBeen;
+import com.xjhaobang.comicread.constract.GetMainDataContract;
+import com.xjhaobang.comicread.listener.OnClickRecyclerViewListener;
 import com.xjhaobang.comicread.model.FrescoImageLoader;
+import com.xjhaobang.comicread.presenter.GetMainDataPresenterImpl;
+import com.xjhaobang.comicread.utils.ProgressDialogUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 
@@ -12,17 +21,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.Unbinder;
 
 /**
  * Created by PC on 2017/9/27.
  */
 
-public class MainFragment extends BaseFragment {
+public class MainFragment extends BaseFragment implements GetMainDataContract.View ,OnClickRecyclerViewListener{
+    private static final String TAG = "MainFragment";
     @BindView(R.id.banner)
     Banner mBanner;
+    @BindView(R.id.rv_new)
+    RecyclerView mRvNew;
+    Unbinder unbinder;
 
+    private List<ComicBeen> mPollingList;
+    private List<ComicBeen> mUpdateList;
     private List<String> mUriList;
     private List<String> mTitleList;
+    private UpdaterComicRvAdapter mUpdaterComicRvAdapter;
+    private GetMainDataContract.Presenter mPresenter;
 
     @Override
     protected int setLayoutResourceId() {
@@ -31,18 +49,12 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected void initData(Bundle bundle) {
+        mPollingList = new ArrayList<>();
+        mUpdateList = new ArrayList<>();
         mUriList = new ArrayList<>();
-        mUriList.add("http://manhua.qpic.cn/manhua_detail/0/23_16_05_eb6b4f0c99127a9048c0a16392304c70.jpg/0");
-        mUriList.add("http://ugc.qpic.cn/manhua_detail/0/10_16_17_385f447299909a1ca54dae007c582cc9.jpg/0");
-        mUriList.add("http://manhua.qpic.cn/manhua_detail/0/28_18_09_c2741989857af8c08f9ce758ffa17eaf.jpg/0");
-        mUriList.add("http://ugc.qpic.cn/manhua_detail/0/18_11_30_88a53f0a243ca4e4677541b1e4370742.jpg/0");
-        mUriList.add("http://ugc.qpic.cn/manhua_detail/0/18_11_53_3036b31c7cdb28c0d98a8ba9a201e435.jpg/0");
         mTitleList = new ArrayList<>();
-        mTitleList.add("寻找身体");
-        mTitleList.add("讲谈社来啦");
-        mTitleList.add("少年jump！中日同步！");
-        mTitleList.add("排球少年！！");
-        mTitleList.add("魔卡少女樱");
+        mUpdaterComicRvAdapter = new UpdaterComicRvAdapter();
+        mPresenter = new GetMainDataPresenterImpl(this);
     }
 
     @Override
@@ -50,16 +62,50 @@ public class MainFragment extends BaseFragment {
         mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
         mBanner.setIndicatorGravity(BannerConfig.LEFT);
         mBanner.setImageLoader(new FrescoImageLoader());
-        mBanner.setImages(mUriList);
-        mBanner.setBannerTitles(mTitleList);
         mBanner.isAutoPlay(true);
         mBanner.setDelayTime(3000);
-        mBanner.start();
+        mRvNew.setLayoutManager(new GridLayoutManager(mBaseActivity,2));
+        mRvNew.setItemAnimator(new DefaultItemAnimator());
+        mUpdaterComicRvAdapter.updateData(mUpdateList);
+        mRvNew.setAdapter(mUpdaterComicRvAdapter);
+        ProgressDialogUtil.showDefaultDialog(mBaseActivity);
+        mPresenter.getMainData();
     }
 
     @Override
     protected void setListener() {
+        mUpdaterComicRvAdapter.setOnRecyclerViewListener(this);
+    }
 
+    @Override
+    public void onItemClick(int position) {
+
+    }
+
+    @Override
+    public boolean onItemLongClick(int position) {
+        return false;
+    }
+
+    @Override
+    public void getMainDataSuccess(List<ComicBeen> pollingList, List<ComicBeen> updateList) {
+        mPollingList = pollingList;
+        mUpdateList = updateList;
+        for (ComicBeen been : pollingList) {
+            mUriList.add(been.getPicUrl());
+            mTitleList.add(been.getTitle());
+        }
+        ProgressDialogUtil.dismiss();
+        mBanner.setImages(mUriList);
+        mBanner.setBannerTitles(mTitleList);
+        mBanner.start();
+        mUpdaterComicRvAdapter.updateData(mUpdateList);
+    }
+
+    @Override
+    public void getError(String msg) {
+        ProgressDialogUtil.dismiss();
+        showToast(msg);
     }
 
 }
