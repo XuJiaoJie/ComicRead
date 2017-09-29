@@ -25,7 +25,7 @@ public class GetHotComicModelImpl implements GetHotComicContract.Model {
 
     @Override
     public void getHotComic() {
-        OkHttpUtil.getInstance().getAsync(Constant.GET_MIAM_Data, new OkHttpResultCallback() {
+        OkHttpUtil.getInstance().getAsync(Constant.GET_MIAM_DATA, new OkHttpResultCallback() {
             @Override
             public void onError(Call call, Exception e) {
                 mPresenter.getError(e.getMessage());

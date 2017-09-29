@@ -1,7 +1,5 @@
 package com.xjhaobang.comicread.utils;
 
-import android.util.Log;
-
 import com.xjhaobang.comicread.been.ComicBeen;
 
 import org.jsoup.Jsoup;
@@ -115,11 +113,33 @@ public class JsoupUtil {
             been.setTitle(ee.attr("title"));
             been.setUrl(ee.attr("href"));
             Element ee1 = ee.getElementsByTag("img").first();
-            been.setUrl(ee1.attr("data-original"));
+            been.setPicUrl(ee1.attr("data-original"));
             Element ee2 = e.select("span.mod-cover-list-text").first();
             been.setUpdate(ee2.text());
             Element ee3 = e.select("p.ret-works-decs").first();
             been.setMark(ee3.text());
+            list.add(been);
+        }
+        return list;
+    }
+
+    /**
+     * 搜索漫画数据
+     */
+    public List<ComicBeen> getSearchData(String s){
+        List<ComicBeen> list = new ArrayList<>();
+        Document doc = Jsoup.parse(s);
+        Element element = doc.select("ul.mod_book_list").select("ul.mod_all_works_list").select("ul.mod_of").first();
+        Elements elements = element.getElementsByTag("li");
+        for (Element e : elements){
+            ComicBeen been = new ComicBeen();
+            Element ee = e.getElementsByTag("a").first();
+            been.setUrl(ee.attr("href"));
+            been.setTitle(ee.attr("title"));
+            Element ee1 = ee.getElementsByTag("img").first();
+            been.setPicUrl(ee1.attr("data-original"));
+            Element ee2 = e.select("h3.mod_book_update").select("h3.fw").first();
+            been.setUpdate(ee2.text());
             list.add(been);
         }
         return list;

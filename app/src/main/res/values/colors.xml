@@ -162,5 +162,6 @@
     <color name="nav_background">#272727</color>
     <color name="nav_text">#ca7521</color>
     <color name="tab_gray">#f3f3f3</color>
+    <color name="middle_transparent_text">#98000000</color>
 
 </resources>

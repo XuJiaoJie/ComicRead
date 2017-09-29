@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import com.xjhaobang.comicread.R;
 import com.xjhaobang.comicread.adapter.CategoryFragmentAdapter;
 import com.xjhaobang.comicread.base.BaseFragment;
+import com.xjhaobang.comicread.model.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class CategoryFragment extends BaseFragment {
     private List<String> mTitleList;
     private CategoryFragmentAdapter mAdapter;
     private String[] mStrings = {"全部","爆笑","热血","冒险","恐怖","科幻","魔幻","玄幻",
-            "校园", "悬疑", "推理", "萌系","穿越", "后宫"};
+            "校园", "悬疑", "推理", "萌系","穿越", "后宫","日本"};
 
     @Override
     protected int setLayoutResourceId() {
@@ -37,9 +38,11 @@ public class CategoryFragment extends BaseFragment {
 
     @Override
     protected void initData(Bundle bundle) {
+        Model model = new Model();
+        model.test();
         mFragmentList = new ArrayList<>();
         mTitleList = new ArrayList<>();
-        for (int i=0;i<14;i++){
+        for (int i=0;i<15;i++){
             CategoryContentFragment fragment = CategoryContentFragment.newInstance(i);
             mFragmentList.add(fragment);
             mTitleList.add(mStrings[i]);
