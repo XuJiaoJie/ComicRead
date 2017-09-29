@@ -1,5 +1,7 @@
 package com.xjhaobang.comicread.utils;
 
+import android.util.Log;
+
 import com.xjhaobang.comicread.been.ComicBeen;
 
 import org.jsoup.Jsoup;
@@ -93,6 +95,31 @@ public class JsoupUtil {
             been.setTitle(ee3.text());
             Element ee4 = ee.select("a.japan-comic-new").first();
             been.setUpdate(ee4.text());
+            list.add(been);
+        }
+        return list;
+    }
+
+    /**
+     * 获取分类漫画数据
+     */
+    public List<ComicBeen> getCategoryData(String s){
+        List<ComicBeen> list = new ArrayList<>();
+        Document document = Jsoup.parse(s);
+        Element element = document.select("div.ret-search-result").first();
+        Elements elements = element.getElementsByTag("li");
+        for (Element e : elements){
+            ComicBeen been = new ComicBeen();
+            Element ee0 = e.select("div.ret-works-cover").first();
+            Element ee = ee0.getElementsByTag("a").first();
+            been.setTitle(ee.attr("title"));
+            been.setUrl(ee.attr("href"));
+            Element ee1 = ee.getElementsByTag("img").first();
+            been.setUrl(ee1.attr("data-original"));
+            Element ee2 = e.select("span.mod-cover-list-text").first();
+            been.setUpdate(ee2.text());
+            Element ee3 = e.select("p.ret-works-decs").first();
+            been.setMark(ee3.text());
             list.add(been);
         }
         return list;

@@ -25,7 +25,7 @@ public class GetMainDataModelImpl implements GetMainDataContract.Model {
 
     @Override
     public void getMainData() {
-        OkHttpUtil.getInstance().getAsync(Constant.GET_Mian_Data, new OkHttpResultCallback() {
+        OkHttpUtil.getInstance().getAsync(Constant.GET_MIAM_Data, new OkHttpResultCallback() {
             @Override
             public void onError(Call call, Exception e) {
                 mPresenter.getError(e.getMessage());

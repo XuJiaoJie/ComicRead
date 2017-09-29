@@ -46,7 +46,7 @@ public class Model {
 //    }
 
     public void test(){
-        OkHttpUtil.getInstance().getAsync("http://ac.qq.com/Jump", new OkHttpResultCallback() {
+        OkHttpUtil.getInstance().getAsync("http://ac.qq.com/Comic/all/state/pink/search/time/vip/1/page/1", new OkHttpResultCallback() {
             @Override
             public void onError(Call call, Exception e) {
                 Log.e(TAG, "onError: "  );
@@ -56,7 +56,7 @@ public class Model {
             public void onResponse(byte[] bytes) {
                 try {
                     String s = new String(bytes,"utf-8");
-                    JsoupUtil.getInstance().getHotData(s);
+                    JsoupUtil.getInstance().getCategoryData(s);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
