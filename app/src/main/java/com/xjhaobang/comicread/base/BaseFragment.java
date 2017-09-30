@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
@@ -65,6 +66,13 @@ public abstract class BaseFragment extends Fragment {
     protected void startActivity(Class clazz) {
         Intent intent = new Intent(mBaseActivity, clazz);
         startActivity(intent);
+    }
+
+    protected void hideSoftInput() {
+        InputMethodManager imm = (InputMethodManager) mBaseActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.hideSoftInputFromWindow(mBaseActivity.getWindow().getDecorView().getWindowToken(), 0);
+        }
     }
 
 }

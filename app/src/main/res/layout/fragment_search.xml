@@ -4,10 +4,50 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="搜索"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/ib_search"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/search_icon_big"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"/>
+
+        <com.xjhaobang.comicread.view.EditTextWithDel
+            android:id="@+id/et_search"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@+id/ib_search"
+            android:background="@drawable/bg_search"
+            android:drawableLeft="@drawable/iv_search"
+            android:drawableStart="@drawable/iv_search"
+            android:drawablePadding="6dp"
+            android:drawableEnd="@drawable/iv_delete"
+            android:drawableRight="@drawable/iv_delete"
+            android:hint="请输入作品名称"
+            android:layout_centerVertical="true"
+            android:paddingEnd="9dp"
+            android:paddingStart="9dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:lines="1"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@null"
+            android:textSize="15sp"
+            android:completionThreshold="1"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
 </LinearLayout>
