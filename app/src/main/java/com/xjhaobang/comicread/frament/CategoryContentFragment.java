@@ -1,5 +1,6 @@
 package com.xjhaobang.comicread.frament;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -12,8 +13,10 @@ import com.xjhaobang.comicread.adapter.LoadMoreAdapterWrapper;
 import com.xjhaobang.comicread.base.BaseFragment;
 import com.xjhaobang.comicread.been.ComicBeen;
 import com.xjhaobang.comicread.constract.GetCategoryComicConstract;
+import com.xjhaobang.comicread.listener.OnClickRecyclerViewListener;
 import com.xjhaobang.comicread.listener.OnLoadMoreDataRv;
 import com.xjhaobang.comicread.presenter.GetCategoryComicPresenterImpl;
+import com.xjhaobang.comicread.ui.ComicItemActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +78,20 @@ public class CategoryContentFragment extends BaseFragment implements GetCategory
                 mSrlFresh.setRefreshing(true);
                 mPageNum = 0;
                 mPresenter.getCategoryComic(mType,mPageNum);
+            }
+        });
+        mAdapter.setOnRecyclerViewListener(new OnClickRecyclerViewListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(mBaseActivity, ComicItemActivity.class);
+                intent.putExtra("comicItemUrl",mList.get(position).getUrl());
+                intent.putExtra("comicItemTitle",mList.get(position).getTitle());
+                startActivity(intent);
+            }
+
+            @Override
+            public boolean onItemLongClick(int position) {
+                return false;
             }
         });
     }

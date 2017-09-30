@@ -1,5 +1,6 @@
 package com.xjhaobang.comicread.frament;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,6 +14,7 @@ import com.xjhaobang.comicread.constract.GetMainDataContract;
 import com.xjhaobang.comicread.listener.OnClickRecyclerViewListener;
 import com.xjhaobang.comicread.model.FrescoImageLoader;
 import com.xjhaobang.comicread.presenter.GetMainDataPresenterImpl;
+import com.xjhaobang.comicread.ui.ComicItemActivity;
 import com.xjhaobang.comicread.utils.ProgressDialogUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -86,7 +88,10 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
 
     @Override
     public void onItemClick(int position) {
-
+        Intent intent = new Intent(mBaseActivity, ComicItemActivity.class);
+        intent.putExtra("comicItemUrl",mUpdateList.get(position).getUrl());
+        intent.putExtra("comicItemTitle",mUpdateList.get(position).getTitle());
+        startActivity(intent);
     }
 
     @Override

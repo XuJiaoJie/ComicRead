@@ -23,15 +23,15 @@ public class CategoryComicRvAdapter extends BaseRecyclerViewAdapter<ComicBeen> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_comic, parent, false);
-        return new CategoryComciHolder(view);
+        return new CategoryComicHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((CategoryComciHolder)holder).bindView(mDataList.get(position));
+        ((CategoryComicHolder)holder).bindView(mDataList.get(position));
     }
 
-    class CategoryComciHolder extends BaseRvHolder{
+    class CategoryComicHolder extends BaseRvHolder{
         @BindView(R.id.sdv_pic)
         SimpleDraweeView mSdvPic;
         @BindView(R.id.tv_update)
@@ -41,7 +41,7 @@ public class CategoryComicRvAdapter extends BaseRecyclerViewAdapter<ComicBeen> {
         @BindView(R.id.tv_mark)
         TextView mTvMark;
 
-        CategoryComciHolder(View itemView) {
+        CategoryComicHolder(View itemView) {
             super(itemView);
         }
 
@@ -50,7 +50,11 @@ public class CategoryComicRvAdapter extends BaseRecyclerViewAdapter<ComicBeen> {
             mSdvPic.setImageURI(Uri.parse(comicBeen.getPicUrl()));
             mTvTitle.setText(comicBeen.getTitle());
             mTvUpdate.setText(comicBeen.getUpdate());
-            mTvMark.setText(comicBeen.getMark());
+            if (comicBeen.getMark() != null){
+                mTvMark.setText(comicBeen.getMark());
+            }else {
+                mTvMark.setVisibility(View.GONE);
+            }
         }
     }
 }

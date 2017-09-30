@@ -1,5 +1,6 @@
 package com.xjhaobang.comicread.frament;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import com.xjhaobang.comicread.been.ComicBeen;
 import com.xjhaobang.comicread.constract.GetHotComicContract;
 import com.xjhaobang.comicread.listener.OnClickRecyclerViewListener;
 import com.xjhaobang.comicread.presenter.GetHotComicPresenterImpl;
+import com.xjhaobang.comicread.ui.ComicItemActivity;
 import com.xjhaobang.comicread.utils.ProgressDialogUtil;
 
 import java.util.ArrayList;
@@ -60,7 +62,10 @@ public class HotFragment extends BaseFragment implements GetHotComicContract.Vie
 
     @Override
     public void onItemClick(int position) {
-
+        Intent intent = new Intent(mBaseActivity, ComicItemActivity.class);
+        intent.putExtra("comicItemUrl",mList.get(position).getUrl());
+        intent.putExtra("comicItemTitle",mList.get(position).getTitle());
+        startActivity(intent);
     }
 
     @Override

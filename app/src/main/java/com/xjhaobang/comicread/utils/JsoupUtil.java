@@ -1,6 +1,8 @@
 package com.xjhaobang.comicread.utils;
 
 import com.xjhaobang.comicread.been.ComicBeen;
+import com.xjhaobang.comicread.been.ComicItem;
+import com.xjhaobang.comicread.been.Episode;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -52,12 +54,12 @@ public class JsoupUtil {
     /**
      * 最新更新漫画数据
      */
-    public List<ComicBeen> getUpdateData(String s){
+    public List<ComicBeen> getUpdateData(String s) {
         List<ComicBeen> list = new ArrayList<>();
         Document doc = Jsoup.parse(s);
         Element e = doc.select("ul.japan-new-list").first();
         Elements es = e.select("div.japan-new-mod");
-        for (Element ee : es){
+        for (Element ee : es) {
             ComicBeen been = new ComicBeen();
             Element ee2 = ee.getElementsByTag("a").first();
             been.setUrl(ee2.attr("href"));
@@ -65,7 +67,7 @@ public class JsoupUtil {
             Element ee3 = ee2.getElementsByTag("img").first();
             been.setPicUrl(ee3.attr("src"));
             Element ee4 = ee.select("div.new-text").first();
-            Elements ees =ee4.getElementsByTag("a");
+            Elements ees = ee4.getElementsByTag("a");
             been.setUpdate(ees.get(1).text());
             list.add(been);
         }
@@ -75,17 +77,17 @@ public class JsoupUtil {
     /**
      * 获取热门漫画数据
      */
-    public List<ComicBeen> getHotData(String s){
+    public List<ComicBeen> getHotData(String s) {
         List<ComicBeen> list = new ArrayList<>();
         Document doc = Jsoup.parse(s);
         Elements es = doc.select("li.comic-content-item");
-        for (Element ee : es ){
+        for (Element ee : es) {
             ComicBeen been = new ComicBeen();
             Element ee1 = ee.select("a.Japan-comic-title").first();
             been.setUrl(ee1.attr("href"));
             Element ee2 = ee1.getElementsByTag("img").first();
             String ss = ee2.attr("src");
-            if (ss.endsWith("gif")){
+            if (ss.endsWith("gif")) {
                 ss = ee2.attr("data-original");
             }
             been.setPicUrl(ss);
@@ -101,12 +103,12 @@ public class JsoupUtil {
     /**
      * 获取分类漫画数据
      */
-    public List<ComicBeen> getCategoryData(String s){
+    public List<ComicBeen> getCategoryData(String s) {
         List<ComicBeen> list = new ArrayList<>();
         Document document = Jsoup.parse(s);
         Element element = document.select("div.ret-search-result").first();
         Elements elements = element.getElementsByTag("li");
-        for (Element e : elements){
+        for (Element e : elements) {
             ComicBeen been = new ComicBeen();
             Element ee0 = e.select("div.ret-works-cover").first();
             Element ee = ee0.getElementsByTag("a").first();
@@ -126,12 +128,12 @@ public class JsoupUtil {
     /**
      * 搜索漫画数据
      */
-    public List<ComicBeen> getSearchData(String s){
+    public List<ComicBeen> getSearchData(String s) {
         List<ComicBeen> list = new ArrayList<>();
         Document doc = Jsoup.parse(s);
         Element element = doc.select("ul.mod_book_list").select("ul.mod_all_works_list").select("ul.mod_of").first();
         Elements elements = element.getElementsByTag("li");
-        for (Element e : elements){
+        for (Element e : elements) {
             ComicBeen been = new ComicBeen();
             Element ee = e.getElementsByTag("a").first();
             been.setUrl(ee.attr("href"));
@@ -143,6 +145,40 @@ public class JsoupUtil {
             list.add(been);
         }
         return list;
+    }
+
+    /**
+     * 解析漫画详情数据
+     */
+    public ComicItem getComicItem(String s) {
+        ComicItem comicItem = new ComicItem();
+        Document document = Jsoup.parse(s);
+        Element element = document.select("div.works-intro").first();
+        Element element1 = element.select("div.works-cover").first();
+        Element element11 = element1.getElementsByTag("a").first();
+        comicItem.setTitle(element11.attr("title"));
+        Element element111 = element11.getElementsByTag("img").first();
+        comicItem.setPicUrl(element111.attr("src"));
+        Element element12 = element1.select("label.works-intro-status").first();
+        comicItem.setStatus(element12.text());
+        Element element2 = element.select("strong.ui-text-orange").first();
+        comicItem.setScore(element2.text());
+        Element element3 = element.select("span.first").first();
+        comicItem.setAuthor(element3.text());
+        Element element4 = element.select("p.works-intro-short").select("p.ui-text-gray9").first();
+        comicItem.setSummary(element4.text());
+        Element e0 = document.select("ol.chapter-page-all").select("ol.works-chapter-list").first();
+        Elements es = e0.select("span.works-chapter-item");
+        List<Episode> list = new ArrayList<>();
+        for (Element e : es) {
+            Episode ep = new Episode();
+            Element ee = e.getElementsByTag("a").first();
+            ep.setUrl(ee.attr("href"));
+            ep.setTitle(ee.text());
+            list.add(ep);
+        }
+        comicItem.setEpisodeList(list);
+        return comicItem;
     }
 
 }

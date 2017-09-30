@@ -26,4 +26,6 @@ public class Constant {
     //搜索
     public static final String GET_SEARCH_URL = "http://ac.qq.com/Comic/searchList/search/";
 
+    //漫画详情
+    public static final String GET_COMIC_ITEM_HEAD = "http://ac.qq.com";
 }
