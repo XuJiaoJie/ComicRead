@@ -18,4 +18,8 @@
         <item name="overlapAnchor">false</item>
     </style>
 
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">17sp</item>
+    </style>
+
 </resources>

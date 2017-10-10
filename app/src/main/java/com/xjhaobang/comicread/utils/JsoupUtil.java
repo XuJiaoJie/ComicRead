@@ -181,4 +181,32 @@ public class JsoupUtil {
         return comicItem;
     }
 
+//    /**
+//     * 解析漫画图片
+//     */
+//    public List<String> getComicPic(String s){
+//        Document document = Jsoup.parse(s);
+//        Log.e(TAG, "getComicPic: 1" );
+//        Element element = document.select("ul.comic-contain").first();
+//        Element e0 = element.getElementsByTag("script").first();
+//        String s0 = e0.html();
+//        Elements elements = element.getElementsByTag("li");
+//        for (Element e : elements){
+//            Element ee = e.getElementsByTag("img").first();
+//        }
+//        return null;
+//    }
+
+    /**
+     * 抓取script标签的DATA字符串
+     */
+    public String getScriptData(String s){
+        Document document = Jsoup.parse(s);
+        Elements elements = document.select("script");
+        String msg = elements.get(elements.size()-4).html();
+        String data = msg.substring(msg.indexOf("\'")+1 ,msg.lastIndexOf("\'"));
+        return data;
+    }
+
+
 }

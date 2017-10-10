@@ -94,10 +94,10 @@ public class SearchFragment extends BaseFragment implements GetSearchComicConstr
 
     @Override
     public void getSearchComicSuccess(List<ComicBeen> list) {
-        ProgressDialogUtil.dismiss();
         hideSoftInput();
         mList = list;
         mAdapter.updateData(mList);
+        ProgressDialogUtil.dismiss();
     }
 
     @Override

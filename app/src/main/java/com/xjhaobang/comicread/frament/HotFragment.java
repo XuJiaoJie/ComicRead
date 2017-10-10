@@ -75,9 +75,9 @@ public class HotFragment extends BaseFragment implements GetHotComicContract.Vie
 
     @Override
     public void getHotComicSuccess(List<ComicBeen> list) {
-        ProgressDialogUtil.dismiss();
         mList = list;
         mRvAdapter.updateData(list);
+        ProgressDialogUtil.dismiss();
     }
 
     @Override

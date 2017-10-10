@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.ComicItemActivity"/>
+        <activity android:name=".ui.ComicPictureActivity"/>
     </application>
 
 </manifest>

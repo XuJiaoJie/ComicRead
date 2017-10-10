@@ -10,13 +10,12 @@ import java.io.UnsupportedEncodingException;
 
 import okhttp3.Call;
 
-import static android.content.ContentValues.TAG;
-
 /**
  * Created by PC on 2017/9/26.
  */
 
 public class Model {
+    private static final String TAG = "Model";
 
 //    public Model() {
 //        OkHttpUtil.getInstance().getAsync("http://ac.qq.com/Comic/all/state/pink/search/time/vip/1/page/1", new OkHttpResultCallback() {
@@ -45,23 +44,46 @@ public class Model {
 //        });
 //    }
 
-    public void test(){
-        OkHttpUtil.getInstance().getAsync("http://ac.qq.com/Comic/comicInfo/id/505430", new OkHttpResultCallback() {
+    public void test() {
+//        Map<String,String> map = new HashMap<>();
+//        map.put("id","505430");
+//        map.put("cid","897");
+//        OkHttpUtil.getInstance().postAsync("http://ac.qq.com/ComicView/getNextChapterPicture", new OkHttpResultCallback() {
+//            @Override
+//            public void onError(Call call, Exception e) {
+//                Log.e(TAG, "onError: " + e.getMessage() );
+//            }
+//
+//            @Override
+//            public void onResponse(byte[] bytes) {
+//                try {
+//                    String s = new String(bytes,"utf-8");
+//                    Log.e(TAG, "onResponse: " + s);
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        },map,null);
+
+
+        OkHttpUtil.getInstance().getAsync("http://ac.qq.com/ComicView/index/id/501661/cid/700", new OkHttpResultCallback() {
             @Override
             public void onError(Call call, Exception e) {
-                Log.e(TAG, "onError: "  );
+                Log.e(TAG, "onError: ");
             }
 
             @Override
             public void onResponse(byte[] bytes) {
                 try {
-                    String s = new String(bytes,"utf-8");
-                    JsoupUtil.getInstance().getComicItem(s);
+                    String s = new String(bytes, "utf-8");
+                    JsoupUtil.getInstance().getScriptData(s);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
             }
         });
+
+
     }
 
 }

@@ -107,11 +107,11 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
             mUriList.add(been.getPicUrl());
             mTitleList.add(been.getTitle());
         }
-        ProgressDialogUtil.dismiss();
         mBanner.setImages(mUriList);
         mBanner.setBannerTitles(mTitleList);
         mBanner.start();
         mUpdaterComicRvAdapter.updateData(mUpdateList);
+        ProgressDialogUtil.dismiss();
     }
 
     @Override
