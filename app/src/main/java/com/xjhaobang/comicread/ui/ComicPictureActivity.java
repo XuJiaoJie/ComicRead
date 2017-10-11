@@ -1,5 +1,6 @@
 package com.xjhaobang.comicread.ui;
 
+import android.content.Intent;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -68,7 +69,8 @@ public class ComicPictureActivity extends BaseToolbarActivity implements GetComi
         mAdapter.setOnClickHolderInside(new OnClickHolderInside() {
             @Override
             public void onClicked(int position) {
-                showToast("点击放大改图"+ position);
+                Intent intent = DetailsPhotoActivity.newIntent(ComicPictureActivity.this,position,(ArrayList<String>) mUrlList);
+                startActivity(intent);
             }
         });
     }

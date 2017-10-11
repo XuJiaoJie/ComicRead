@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".ui.ComicItemActivity"/>
         <activity android:name=".ui.ComicPictureActivity"/>
+        <activity android:name=".ui.DetailsPhotoActivity"/>
     </application>
 
 </manifest>

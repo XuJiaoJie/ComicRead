@@ -117,6 +117,7 @@ public class CategoryContentFragment extends BaseFragment implements GetCategory
             }
         }
         mAdapterWrapper.notifyDataSetChanged();
+
     }
 
     @Override
