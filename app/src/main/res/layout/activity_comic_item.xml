@@ -26,10 +26,11 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/sdv_pic"
                     android:layout_width="175dp"
-                    android:layout_height="240dp"
+                    android:layout_height="230dp"
                     android:layout_margin="10dp"
-                    fresco:actualImageScaleType="fitCenter"
+                    fresco:actualImageScaleType="fitXY"
                     fresco:fadeDuration="300"
+                    fresco:backgroundImage="@drawable/photo_empty_photo"
                     fresco:failureImage="@drawable/photo_empty_photo"
                     fresco:failureImageScaleType="fitCenter"
                     fresco:placeholderImage="@drawable/photo_empty_photo"
