@@ -80,17 +80,24 @@ public class ComicPictureActivity extends BaseToolbarActivity implements GetComi
             @Override
             public void onPageFinished(WebView view, String url) {
                 mWebView.loadUrl("javascript:aaa('" + data + " ')");
+                Log.e(TAG, "onPageFinished: " + data );
                 super.onPageFinished(view, url);
             }
         });
     }
 
     @Override
-    public void getComicPictureSuccess(List<String> urls) {
-        ProgressDialogUtil.dismiss();
-        Log.e(TAG, "getComicPictureSuccess: " + urls.toString());
-        mUrlList = urls;
-        mAdapter.updateData(mUrlList);
+    public void getComicPictureSuccess(final List<String> urls) {
+        Log.e(TAG, "getComicPictureSuccess: " + urls.toString() );
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ProgressDialogUtil.dismiss();
+                mUrlList = urls;
+                mAdapter.updateData(mUrlList);
+            }
+        });
+
     }
 
     @Override

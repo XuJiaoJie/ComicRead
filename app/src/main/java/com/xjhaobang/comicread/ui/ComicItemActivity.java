@@ -94,6 +94,7 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
 
     @Override
     public void getComicItemSuccess(ComicItem comicItem) {
+        ProgressDialogUtil.dismiss();
         mSdvPic.setImageURI(Uri.parse(comicItem.getPicUrl()));
         mTvStatus.setText(comicItem.getStatus());
         mTvTitle.setText(comicItem.getTitle());
@@ -102,7 +103,6 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
         mTvSummary.setText(comicItem.getSummary());
         mList = comicItem.getEpisodeList();
         mAdapter.updateData(mList);
-        ProgressDialogUtil.dismiss();
     }
 
     @Override
