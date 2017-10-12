@@ -66,7 +66,6 @@ public class ComicWebViewActivity extends BaseActivity {
                 } else {
                     return super.shouldOverrideUrlLoading(view, url);
                 }
-
             }
 
             @Override
@@ -97,7 +96,7 @@ public class ComicWebViewActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
-            mWebView.goBack();// 返回前一个页面
+            mWebView.goBack();
             return true;
         }
         return super.onKeyDown(keyCode, event);
