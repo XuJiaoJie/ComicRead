@@ -76,7 +76,7 @@ public class CategoryContentFragment extends BaseFragment implements GetCategory
             @Override
             public void onRefresh() {
                 mSrlFresh.setRefreshing(true);
-                mPageNum = 0;
+                mPageNum = 1;
                 mPresenter.getCategoryComic(mType,mPageNum);
             }
         });
@@ -104,11 +104,13 @@ public class CategoryContentFragment extends BaseFragment implements GetCategory
 
     @Override
     public void getCategoryComicSuccess(List<ComicBeen> list) {
-        mSrlFresh.setRefreshing(false);
+        if (mSrlFresh != null && mSrlFresh.isRefreshing()){
+            mSrlFresh.setRefreshing(false);
+        }
         if (list == null || list.size() == 0){
             mAdapterWrapper.setHasMoreData(false);
         }else {
-            if (mPageNum == 0){
+            if (mPageNum == 1){
                 mList = list;
                 mAdapter.updateData(mList);
             }else {
@@ -117,7 +119,6 @@ public class CategoryContentFragment extends BaseFragment implements GetCategory
             }
         }
         mAdapterWrapper.notifyDataSetChanged();
-
     }
 
     @Override

@@ -162,7 +162,11 @@ public class JsoupUtil {
         Element element12 = element1.select("label.works-intro-status").first();
         comicItem.setStatus(element12.text());
         Element element2 = element.select("strong.ui-text-orange").first();
-        comicItem.setScore(element2.text());
+        if (element2 != null) {
+            comicItem.setScore(element2.text());
+        } else {
+            comicItem.setScore("暂未评分");
+        }
         Element element3 = element.select("span.first").first();
         comicItem.setAuthor(element3.text());
         Element element4 = element.select("p.works-intro-short").select("p.ui-text-gray9").first();
@@ -200,11 +204,11 @@ public class JsoupUtil {
     /**
      * 抓取script标签的DATA字符串
      */
-    public String getScriptData(String s){
+    public String getScriptData(String s) {
         Document document = Jsoup.parse(s);
         Elements elements = document.select("script");
-        String msg = elements.get(elements.size()-4).html();
-        String data = msg.substring(msg.indexOf("\'")+1 ,msg.lastIndexOf("\'"));
+        String msg = elements.get(elements.size() - 4).html();
+        String data = msg.substring(msg.indexOf("\'") + 1, msg.lastIndexOf("\'"));
         return data;
     }
 

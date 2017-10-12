@@ -27,7 +27,7 @@ import butterknife.BindView;
  * Created by PC on 2017/9/30.
  */
 
-public class ComicItemActivity extends BaseToolbarActivity implements GetComicItemConstract.View {
+public class ComicItemActivity extends BaseToolbarActivity implements GetComicItemConstract.View{
     @BindView(R.id.sdv_pic)
     SimpleDraweeView mSdvPic;
     @BindView(R.id.tv_status)
@@ -68,7 +68,7 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
     protected void initView() {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle(mTitle);
-        mRvEpisode.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        mRvEpisode.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRvEpisode.setItemAnimator(new DefaultItemAnimator());
         mRvEpisode.setAdapter(mAdapter);
         ProgressDialogUtil.showDefaultDialog(this);
@@ -80,8 +80,8 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
         mAdapter.setOnRecyclerViewListener(new OnClickRecyclerViewListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(ComicItemActivity.this,ComicPictureActivity.class);
-                intent.putExtra("Episode",mList.get(position));
+                Intent intent = new Intent(ComicItemActivity.this, ComicPictureActivity.class);
+                intent.putExtra("Episode", mList.get(position));
                 startActivity(intent);
             }
 
@@ -92,9 +92,9 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
         });
     }
 
+
     @Override
     public void getComicItemSuccess(ComicItem comicItem) {
-        ProgressDialogUtil.dismiss();
         mSdvPic.setImageURI(Uri.parse(comicItem.getPicUrl()));
         mTvStatus.setText(comicItem.getStatus());
         mTvTitle.setText(comicItem.getTitle());
@@ -103,6 +103,7 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
         mTvSummary.setText(comicItem.getSummary());
         mList = comicItem.getEpisodeList();
         mAdapter.updateData(mList);
+        ProgressDialogUtil.dismiss();
     }
 
     @Override
@@ -110,6 +111,5 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
         ProgressDialogUtil.dismiss();
         showToast(msg);
     }
-
 
 }
