@@ -63,7 +63,7 @@ public class ComicWebViewActivity extends BaseActivity {
                 if(startUrl!=null && startUrl.equals(url)) {
                     view.loadUrl(url);
                     return true;
-                } else {//交给系统处理
+                } else {
                     return super.shouldOverrideUrlLoading(view, url);
                 }
 
