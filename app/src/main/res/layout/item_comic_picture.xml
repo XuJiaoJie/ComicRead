@@ -8,8 +8,8 @@
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdv_pic"
-        android:layout_width="300dp"
-        android:layout_height="450dp"
+        android:layout_width="320dp"
+        android:layout_height="480dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"

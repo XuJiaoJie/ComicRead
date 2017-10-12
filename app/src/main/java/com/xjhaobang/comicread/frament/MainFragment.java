@@ -15,6 +15,7 @@ import com.xjhaobang.comicread.listener.OnClickRecyclerViewListener;
 import com.xjhaobang.comicread.model.FrescoImageLoader;
 import com.xjhaobang.comicread.presenter.GetMainDataPresenterImpl;
 import com.xjhaobang.comicread.ui.ComicItemActivity;
+import com.xjhaobang.comicread.ui.ComicWebViewActivity;
 import com.xjhaobang.comicread.utils.ProgressDialogUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
@@ -69,6 +70,7 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
         mBanner.setDelayTime(3000);
         mRvNew.setLayoutManager(new GridLayoutManager(mBaseActivity,2));
         mRvNew.setItemAnimator(new DefaultItemAnimator());
+        mRvNew.setNestedScrollingEnabled(false);
         mUpdaterComicRvAdapter.updateData(mUpdateList);
         mRvNew.setAdapter(mUpdaterComicRvAdapter);
         ProgressDialogUtil.showDefaultDialog(mBaseActivity);
@@ -81,7 +83,18 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
-                showToast(mPollingList.get(position).getTitle());
+                Intent intent;
+                if (mPollingList.get(position).getUrl().startsWith("http://ac.qq.com/Comic/comicInfo/id/")){
+                    intent = new Intent(mBaseActivity, ComicItemActivity.class);
+                    String url = mPollingList.get(position).getUrl();
+                    intent.putExtra("comicItemUrl",url.substring(url.indexOf("/Comic")));
+                }else {
+                    intent = new Intent(mBaseActivity, ComicWebViewActivity.class);
+                    intent.putExtra("comicItemUrl",mPollingList.get(position).getUrl());
+
+                }
+                intent.putExtra("comicItemTitle",mPollingList.get(position).getTitle());
+                startActivity(intent);
             }
         });
     }
