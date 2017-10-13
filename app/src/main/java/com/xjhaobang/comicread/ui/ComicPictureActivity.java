@@ -90,7 +90,6 @@ public class ComicPictureActivity extends BaseToolbarActivity implements GetComi
 
     @Override
     public void getComicPictureSuccess(final List<String> urls) {
-        Log.e(TAG, "getComicPictureSuccess: " + urls.toString() );
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
