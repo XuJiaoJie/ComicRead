@@ -2,6 +2,7 @@ package com.xjhaobang.comicread.ui;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -42,6 +43,8 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
     TextView mTvSummary;
     @BindView(R.id.rv_episode)
     RecyclerView mRvEpisode;
+    @BindView(R.id.scroll_view)
+    NestedScrollView mScrollView;
 
     private String mUrl;
     private String mTitle;
@@ -71,7 +74,6 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
         mRvEpisode.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRvEpisode.setItemAnimator(new DefaultItemAnimator());
         mRvEpisode.setAdapter(mAdapter);
-        mRvEpisode.setNestedScrollingEnabled(false);
         ProgressDialogUtil.showDefaultDialog(this);
         mPresenter.getComicItem(mUrl);
     }
