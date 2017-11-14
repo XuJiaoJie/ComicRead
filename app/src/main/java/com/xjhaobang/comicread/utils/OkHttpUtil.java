@@ -135,14 +135,12 @@ public class OkHttpUtil {
             }
         }
         if (files != null) {
-            for (File file :
-                    files) {
+            for (File file : files) {
                 RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                 multipartBodyBuilder.addFormDataPart("file", file.getName(), requestBody);
             }
         }
         MultipartBody multipartBody = multipartBodyBuilder.setType(MultipartBody.FORM).build();
-        ;
 
 //        FormBody.Builder formBodyBuilder = new FormBody.Builder();
 //        if (params != null) {
