@@ -17,7 +17,6 @@ import java.util.List;
  */
 
 public class GetComicPicturePresenterImpl implements GetComicPictureConstract.Presenter {
-    private static final String TAG = "GetComicPicturePresente";
     private GetComicPictureConstract.View mView;
     private GetComicPictureConstract.Model mModel;
 
