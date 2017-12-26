@@ -176,5 +176,4 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
         ProgressDialogUtil.dismiss();
         showToast(msg);
     }
-
 }

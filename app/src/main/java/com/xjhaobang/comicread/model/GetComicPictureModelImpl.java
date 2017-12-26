@@ -1,7 +1,5 @@
 package com.xjhaobang.comicread.model;
 
-import android.util.Log;
-
 import com.xjhaobang.comicread.constants.Constant;
 import com.xjhaobang.comicread.constract.GetComicPictureConstract;
 import com.xjhaobang.comicread.utils.JsoupUtil;
@@ -17,7 +15,6 @@ import okhttp3.Call;
  */
 
 public class GetComicPictureModelImpl implements GetComicPictureConstract.Model {
-    private static final String TAG = "GetComicPictureModelImp";
     private GetComicPictureConstract.Presenter mPresenter;
 
     public GetComicPictureModelImpl(GetComicPictureConstract.Presenter presenter) {
