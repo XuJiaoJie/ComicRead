@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -110,7 +109,6 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
 
     @Override
     public void scrollBottom() {
-        Log.e(TAG, "scrollBottom: " + "滑到底部了");
         if (mTempList.size() > page * 40) {
             new Thread(new Runnable() {
                 @Override
