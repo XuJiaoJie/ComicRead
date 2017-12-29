@@ -34,7 +34,6 @@ import butterknife.BindView;
  */
 
 public class ComicItemActivity extends BaseToolbarActivity implements GetComicItemConstract.View, ScrollBottomListener {
-    private static final String TAG = "ComicItemActivity";
     @BindView(R.id.sdv_pic)
     SimpleDraweeView mSdvPic;
     @BindView(R.id.tv_status)
@@ -84,9 +83,6 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
     protected void initView() {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setTitle(mTitle);
-//        mRvEpisode.setNestedScrollingEnabled(false); // 解决滑动不顺畅
-//        mRvEpisode.setHasFixedSize(false); // 解决滑动不顺畅
-//        mRvEpisode.setFocusable(false); // 防止RecyclerView加载数据的时候抢占焦点，把顶部view遮挡了
         mRvEpisode.setLayoutManager(new NoScrollLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRvEpisode.setItemAnimator(new DefaultItemAnimator());
         mRvEpisode.setAdapter(mAdapter);
