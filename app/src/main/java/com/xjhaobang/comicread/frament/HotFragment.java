@@ -85,5 +85,4 @@ public class HotFragment extends BaseFragment implements GetHotComicContract.Vie
         ProgressDialogUtil.dismiss();
         showToast(msg);
     }
-
 }

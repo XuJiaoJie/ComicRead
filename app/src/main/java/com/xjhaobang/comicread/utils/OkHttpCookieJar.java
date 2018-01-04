@@ -40,6 +40,7 @@ public class OkHttpCookieJar implements CookieJar {
         }
         return false;
     }
+
     public static void resetCookies(){
         sCookies = null;
     }
@@ -47,4 +48,5 @@ public class OkHttpCookieJar implements CookieJar {
     public static List<Cookie> getCookies(){
         return sCookies;
     }
+
 }

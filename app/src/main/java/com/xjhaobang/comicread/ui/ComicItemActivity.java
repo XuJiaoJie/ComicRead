@@ -163,6 +163,7 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
             page++;
         }
         mAdapter.updateData(mList);
+
     }
 
     @Override
