@@ -42,5 +42,4 @@ public class GetComicPictureModelImpl implements GetComicPictureConstract.Model 
         });
     }
 
-
 }
