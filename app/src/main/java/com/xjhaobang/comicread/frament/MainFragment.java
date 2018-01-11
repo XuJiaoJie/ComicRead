@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.xjhaobang.comicread.R;
 import com.xjhaobang.comicread.adapter.UpdaterComicRvAdapter;
@@ -31,13 +33,16 @@ import butterknife.Unbinder;
  * Created by PC on 2017/9/27.
  */
 
-public class MainFragment extends BaseFragment implements GetMainDataContract.View ,OnClickRecyclerViewListener{
+public class MainFragment extends BaseFragment implements GetMainDataContract.View, OnClickRecyclerViewListener {
     private static final String TAG = "MainFragment";
     @BindView(R.id.banner)
     Banner mBanner;
     @BindView(R.id.rv_new)
     RecyclerView mRvNew;
     Unbinder unbinder;
+    @BindView(R.id.ll_back)
+    LinearLayout mLlBack;
+    Unbinder unbinder1;
 
     private List<ComicBeen> mPollingList;
     private List<ComicBeen> mUpdateList;
@@ -68,11 +73,12 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
         mBanner.setImageLoader(new FrescoImageLoader());
         mBanner.isAutoPlay(true);
         mBanner.setDelayTime(3000);
-        mRvNew.setLayoutManager(new GridLayoutManager(mBaseActivity,2));
+        mRvNew.setLayoutManager(new GridLayoutManager(mBaseActivity, 2));
         mRvNew.setItemAnimator(new DefaultItemAnimator());
         mRvNew.setNestedScrollingEnabled(false);
         mUpdaterComicRvAdapter.updateData(mUpdateList);
         mRvNew.setAdapter(mUpdaterComicRvAdapter);
+        mLlBack.setVisibility(View.INVISIBLE);
         ProgressDialogUtil.showDefaultDialog(mBaseActivity);
         mPresenter.getMainData();
     }
@@ -84,16 +90,16 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
             @Override
             public void OnBannerClick(int position) {
                 Intent intent;
-                if (mPollingList.get(position).getUrl().startsWith("http://ac.qq.com/Comic/comicInfo/id/")){
+                if (mPollingList.get(position).getUrl().startsWith("http://ac.qq.com/Comic/comicInfo/id/")) {
                     intent = new Intent(mBaseActivity, ComicItemActivity.class);
                     String url = mPollingList.get(position).getUrl();
-                    intent.putExtra("comicItemUrl",url.substring(url.indexOf("/Comic")));
-                }else {
+                    intent.putExtra("comicItemUrl", url.substring(url.indexOf("/Comic")));
+                } else {
                     intent = new Intent(mBaseActivity, ComicWebViewActivity.class);
-                    intent.putExtra("comicItemUrl",mPollingList.get(position).getUrl());
+                    intent.putExtra("comicItemUrl", mPollingList.get(position).getUrl());
 
                 }
-                intent.putExtra("comicItemTitle",mPollingList.get(position).getTitle());
+                intent.putExtra("comicItemTitle", mPollingList.get(position).getTitle());
                 startActivity(intent);
             }
         });
@@ -102,8 +108,8 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(mBaseActivity, ComicItemActivity.class);
-        intent.putExtra("comicItemUrl",mUpdateList.get(position).getUrl());
-        intent.putExtra("comicItemTitle",mUpdateList.get(position).getTitle());
+        intent.putExtra("comicItemUrl", mUpdateList.get(position).getUrl());
+        intent.putExtra("comicItemTitle", mUpdateList.get(position).getTitle());
         startActivity(intent);
     }
 
@@ -114,6 +120,8 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
 
     @Override
     public void getMainDataSuccess(List<ComicBeen> pollingList, List<ComicBeen> updateList) {
+        ProgressDialogUtil.dismiss();
+        mLlBack.setVisibility(View.VISIBLE);
         mPollingList = pollingList;
         mUpdateList = updateList;
         for (ComicBeen been : pollingList) {
@@ -124,7 +132,6 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
         mBanner.setBannerTitles(mTitleList);
         mBanner.start();
         mUpdaterComicRvAdapter.updateData(mUpdateList);
-        ProgressDialogUtil.dismiss();
     }
 
     @Override
@@ -132,5 +139,4 @@ public class MainFragment extends BaseFragment implements GetMainDataContract.Vi
         ProgressDialogUtil.dismiss();
         showToast(msg);
     }
-
 }

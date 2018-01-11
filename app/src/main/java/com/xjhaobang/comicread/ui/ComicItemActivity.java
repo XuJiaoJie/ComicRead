@@ -53,6 +53,8 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
     LinearLayout mLlLoading;
     @BindView(R.id.ll_no_more)
     LinearLayout mLlNoMore;
+    @BindView(R.id.ll_back)
+    LinearLayout mLlBack;
 
     private String mUrl;
     private String mTitle;
@@ -60,7 +62,6 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
     private EpisodeRvAdapter mAdapter;
     private List<Episode> mList, mTempList;
     private int page = 0;
-
 
     @Override
     protected int setLayoutResID() {
@@ -85,6 +86,7 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
         mRvEpisode.setLayoutManager(new NoScrollLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         mRvEpisode.setItemAnimator(new DefaultItemAnimator());
         mRvEpisode.setAdapter(mAdapter);
+        mLlBack.setVisibility(View.INVISIBLE);
         ProgressDialogUtil.showDefaultDialog(this);
         mPresenter.getComicItem(mUrl);
     }
@@ -122,10 +124,10 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
                         @Override
                         public void run() {
                             int num;
-                            if (mTempList.size() < page*40+40){
+                            if (mTempList.size() < page * 40 + 40) {
                                 num = mTempList.size();
-                            }else {
-                                num = page*40+40;
+                            } else {
+                                num = page * 40 + 40;
                             }
                             List<Episode> list = mTempList.subList(page * 40, num);
                             page++;
@@ -145,6 +147,7 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
 
     @Override
     public void getComicItemSuccess(ComicItem comicItem) {
+        mLlBack.setVisibility(View.VISIBLE);
         ProgressDialogUtil.dismiss();
         mSdvPic.setImageURI(Uri.parse(comicItem.getPicUrl()));
         mTvStatus.setText(comicItem.getStatus());
@@ -171,4 +174,5 @@ public class ComicItemActivity extends BaseToolbarActivity implements GetComicIt
         ProgressDialogUtil.dismiss();
         showToast(msg);
     }
+
 }
