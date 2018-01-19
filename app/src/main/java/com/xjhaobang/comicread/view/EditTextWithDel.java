@@ -120,5 +120,4 @@ public class EditTextWithDel extends AppCompatEditText {
         setCompoundDrawables(getCompoundDrawables()[0],getCompoundDrawables()[1],
                 rightDrawable,getCompoundDrawables()[3]);
     }
-
 }
