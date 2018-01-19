@@ -50,7 +50,6 @@ public class DetailsPhotoActivity<T> extends BaseActivity {
         mSize = mPhotoList.size();
         mPagerAdapter = new PhotoPagerAdapter(this, mPhotoList);
         mVpDetailsPhoto.setAdapter(mPagerAdapter);
-
     }
 
     @Override
