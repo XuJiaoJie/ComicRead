@@ -13,16 +13,16 @@ import butterknife.ButterKnife;
 
 public abstract class BaseRecyclerViewAdapter<T> extends RecyclerView.Adapter {
     protected List<T> mDataList = new ArrayList<>();
-    protected OnClickRecyclerViewListener mOnRecyclerViewListener;
+    private OnClickRecyclerViewListener mOnRecyclerViewListener;
 
     //更新数据
-    public void updateData(List dataList) {
+    public void updateData(List<T> dataList) {
         mDataList.clear();
         appendData(dataList);
     }
 
     //分页加载，追加数据
-    public void appendData(List dataList) {
+    public void appendData(List<T> dataList) {
         if (null != dataList && !dataList.isEmpty()) {
             mDataList.addAll(dataList);
             notifyDataSetChanged();
